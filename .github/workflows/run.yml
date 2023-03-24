@@ -29,3 +29,11 @@ jobs:
           commit_message: Apply postman changes
       - run: npm i postman-to-openapi -g
       - run: p2o Chaingateway.io.postman_collection.json -f Chaingateway.io.openapi.yaml -o options.json
+      - run: |
+          git config --global user.name "Action Bot"
+          git config --global user.email "support@chaingateway.io"
+
+          git add -A
+          git commit -m "updated opanpi yaml file"
+          git push
+
