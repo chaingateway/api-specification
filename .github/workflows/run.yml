@@ -28,4 +28,4 @@ jobs:
         with:
           commit_message: Apply postman changes
       - run: npm i postman-to-openapi -g
-      - run: p2o Chaingateway.io V2.postman_collection.json -f Chaingateway.io.openapi.yaml -o options.json
+      - run: p2o Chaingateway.io.postman_collection.json -f Chaingateway.io.openapi.yaml -o options.json
