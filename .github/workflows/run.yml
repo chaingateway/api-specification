@@ -34,6 +34,6 @@ jobs:
           git config --global user.email "support@chaingateway.io"
 
           git add -A
-          git commit -m "updated opanpi yaml file"
+          git commit -m "updated openapi yaml file"
           git push
 
