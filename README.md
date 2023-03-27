@@ -2,9 +2,9 @@
 ![Logo](https://www.eu-startups.com/wp-content/uploads/2020/10/Logo_gradient_1000x1000-500x500.png) 
 
 
-# Chaingateway.io API Specifications
+# [Chaingateway.io](https://chaingateway.io) Blockchain API Specifications
 
-Welcome to the Chaingateway.io API Specifications repository! Here you will find the API specifications in both Postman and OpenAPI formats, which can be used to interface with our blockchain gateway.
+Welcome to the [Chaingateway.io](https://chaingateway.io) Blockchain API Specifications repository! Here you will find the API specifications in both Postman and OpenAPI formats, which can be used to interface with our blockchain gateway.
 Getting Started
 
 ## Getting Started
