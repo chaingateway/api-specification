@@ -318,16 +318,20 @@ paths:
   /v2/ethereum/blocks/number:
     get:
       tags:
-        - Market
-      summary: getLastBlockNumber Copy
-      security:
-        - apikeyAuth: []
+        - Ethereum > Info Requests
+      summary: getLastBlockNumber
+      description: Get the latest block number
       parameters:
         - name: Accept
           in: header
           schema:
             type: string
           example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: '{{api_key}}'
       responses:
         '200':
           description: OK
@@ -454,6 +458,11 @@ paths:
           schema:
             type: string
           example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: APIKEY
       responses:
         '200':
           description: OK
@@ -572,8 +581,8 @@ paths:
   /v2/ethereum/balances/{address}/erc20/{erc20_token}:
     get:
       tags:
-        - Polygon > Info Requests
-      summary: getERC20Balance
+        - Ethereum > Info Requests
+      summary: getAllERC20Balance
       description: Get the balance of an ERC20 address
       parameters:
         - name: Accept
@@ -586,7 +595,6 @@ paths:
           schema:
             type: string
           required: true
-          description: Polygon address
           example: '0xa1f36016221d48ce7f15cde7b826a4fbe09bacce'
         - name: erc20_token
           in: path
@@ -649,7 +657,7 @@ paths:
   /v2/ethereum/blocks/{block}:
     get:
       tags:
-        - Polygon > Info Requests
+        - Ethereum > Info Requests
       summary: getBlock
       description: Get information of a specific block
       parameters:
@@ -663,7 +671,7 @@ paths:
           schema:
             type: string
           required: true
-          description: Polygon block number or hash
+          description: Block number or hash
           example: '0xd9186b67ae0d3ee0777a607eeb195c5a9fb0affcd78ddcd7481efae4b258c9f5'
       responses:
         '200':
@@ -799,7 +807,7 @@ paths:
   /v2/ethereum/nfts/{contract}/owner/{token_id}:
     get:
       tags:
-        - Polygon > Info Requests
+        - Ethereum > Info Requests
       summary: getNFTOwner
       description: Get the Owner of an NFT
       parameters:
@@ -813,14 +821,14 @@ paths:
           schema:
             type: string
           required: true
-          description: Polygon contract address
-          example: '0xd9186b67ae0d3ee0777a607eeb195c5a9fb0affcd78ddcd7481efae4b258c9f5'
+          description: NFT contract address
+          example: '0x9db475371b5cc2913d3219f72e16a3f101339a05'
         - name: token_id
           in: path
           schema:
             type: integer
           required: true
-          description: Polygon token id
+          description: Id of the NFT
           example: '374'
       responses:
         '200':
@@ -877,7 +885,7 @@ paths:
   /v2/ethereum/transactions/{transaction}/decoded:
     get:
       tags:
-        - Polygon > Info Requests
+        - Ethereum > Info Requests
       summary: getTransaction
       description: >-
         Get info about a transaction
@@ -946,7 +954,7 @@ paths:
                 type: object
               examples:
                 example-0:
-                  summary: getTransactionReceipt (decoded)
+                  summary: getTransaction (decoded)
                   value:
                     ok: true
                     status: 200
@@ -1027,7 +1035,7 @@ paths:
   /v2/ethereum/transactions/{transaction}/receipt/decoded:
     get:
       tags:
-        - Polygon > Info Requests
+        - Ethereum > Info Requests
       summary: getTransactionReceipt
       description: >-
         Get info about a transaction receipt
@@ -1177,7 +1185,7 @@ paths:
   /v2/ethereum/addresses:
     post:
       tags:
-        - Polygon > Address Requests
+        - Ethereum > Address Requests
       summary: newAddress
       requestBody:
         content:
@@ -1246,7 +1254,7 @@ paths:
                   ethereumaddress: '0xfa343ee01667869cfb409b24ae33f7ce8b110eb0'
     get:
       tags:
-        - Polygon > Address Requests
+        - Ethereum > Address Requests
       summary: listAddresses
       parameters:
         - name: Accept
@@ -1304,7 +1312,7 @@ paths:
   /v2/ethereum/addresses/{address}:
     delete:
       tags:
-        - Polygon > Address Requests
+        - Ethereum > Address Requests
       summary: deleteAddress
       parameters:
         - name: Accept
@@ -1317,7 +1325,7 @@ paths:
           schema:
             type: string
           required: true
-          description: Polygon address
+          description: Ethereum address
           example: '0xfa343ee01667869cfb409b24ae33f7ce8b110eb0'
       responses:
         '200':
@@ -1428,7 +1436,7 @@ paths:
   /v2/ethereum/addresses/import:
     post:
       tags:
-        - Polygon > Address Requests
+        - Ethereum > Address Requests
       summary: importAddress
       requestBody:
         content:
@@ -1512,14 +1520,15 @@ paths:
   /v2/ethereum/addresses/export/{address}:
     post:
       tags:
-        - Polygon > Address Requests
+        - Ethereum > Address Requests
       summary: exportAddress
       requestBody:
         content:
           application/json:
             schema:
               type: object
-              example: ''
+              example:
+                password: test123
       parameters:
         - name: Accept
           in: header
@@ -1531,8 +1540,8 @@ paths:
           schema:
             type: string
           required: true
-          description: Polygon address
-          example: '0xfa343ee01667869cfb409b24ae33f7ce8b110eb0'
+          description: '0xe7114f0dbd5a5fa62ed2df905f7391c957ff9e36'
+          example: '0xacc767f4042360c5f08c7b98bac8e66a5c679cef'
       responses:
         '200':
           description: OK
@@ -9284,7 +9293,7 @@ paths:
                     url: https://example.com/ipnreceiver.php
     get:
       tags:
-        - Polygon > Webhooks/IPN Requests
+        - Ethereum > Webhooks/IPN Requests
       summary: listSubscribedAddresses
       description: Returns all subscriptions/IPNs created with an account.
       parameters:
@@ -9373,7 +9382,7 @@ paths:
   /v2/ethereum/webhooks/{webhook}:
     delete:
       tags:
-        - Polygon > Webhooks/IPN Requests
+        - Ethereum > Webhooks/IPN Requests
       summary: unsubscribeAddress
       description: >-
         Deletes an existing subscription/IPN for the given address (and
@@ -9389,7 +9398,7 @@ paths:
           schema:
             type: string
           required: true
-          description: Webhook Id
+          description: Webhook id
           example: 626407c62e5e8235ca561dce
       responses:
         '200':
@@ -9438,7 +9447,7 @@ paths:
   /v2/ethereum/webkhooks/{webhook}/notifications/failed:
     get:
       tags:
-        - Polygon > Webhooks/IPN Requests
+        - Ethereum > Webhooks/IPN Requests
       summary: listFailedIPNs
       description: Returns all subscriptions/IPNs created with an account.
       parameters:
@@ -9452,7 +9461,7 @@ paths:
           schema:
             type: string
           required: true
-          description: Webhook Id
+          description: webhook id
           example: 626407c62e5e8235ca561dce
       responses:
         '200':
@@ -9495,7 +9504,7 @@ paths:
   /v2/ethereum/webkhooks/notifications/failed:
     get:
       tags:
-        - Polygon > Webhooks/IPN Requests
+        - Ethereum > Webhooks/IPN Requests
       summary: listIPNsByWebhookId
       description: Returns all subscriptions/IPNs created with an account.
       parameters:
@@ -9614,7 +9623,7 @@ paths:
   /v2/ethereum/transactions/erc20:
     post:
       tags:
-        - Polygon > Transaction Requests
+        - Ethereum > Transaction Requests
       summary: sendERC20
       requestBody:
         content:
@@ -9642,7 +9651,7 @@ paths:
   /v2/ethereum/transactions/erc721:
     post:
       tags:
-        - Polygon > Transaction Requests
+        - Ethereum > Transaction Requests
       summary: sendERC721
       requestBody:
         content:
@@ -9670,7 +9679,7 @@ paths:
   /v2/ethereum/transactions:
     post:
       tags:
-        - Polygon > Transaction Requests
+        - Ethereum > Transaction Requests
       summary: sendTransaction
       requestBody:
         content:
@@ -9986,6 +9995,154 @@ paths:
                 message: Ethereum address balance successfully parsed.
                 data:
                   balance: '0.009956019840987648'
+  /v2/polygon/balances/{address}/erc20/{erc20_token}:
+    get:
+      tags:
+        - Polygon > Info Requests
+      summary: getERC20Balance
+      description: Get the balance of an ERC20 address
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: address
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Polygon address
+          example: '0xa1f36016221d48ce7f15cde7b826a4fbe09bacce'
+        - name: erc20_token
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '0xa1f36016221d48ce7f15cde7b826a4fbe09bacce'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 09:43:58 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '103'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            expires:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 09:43:58 GMT
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.1.12
+            cache-control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            set-cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=3j8i9a37h1o0f67hia421oostt; path=/; secure;
+                  httponly; samesite=lax
+            Apigw-Requestid:
+              schema:
+                type: string
+                example: dzKuuhnuFiAEJqA=
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                status: 200
+                message: Token Balance has been successfully parsed.
+                data:
+                  balance: '0'
+  /v2/polygon/blocks/{block}:
+    get:
+      tags:
+        - Polygon > Info Requests
+      summary: getBlock
+      description: Get information of a specific block
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: block
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Polygon block number or hash
+          example: '0xd9186b67ae0d3ee0777a607eeb195c5a9fb0affcd78ddcd7481efae4b258c9f5'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:13:02 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '79'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.1.12
+            cache-control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            expires:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:13:02 GMT
+            set-cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=47ceko3gpajq2jeci7k309c8il; path=/; secure;
+                  httponly; samesite=lax
+            Apigw-Requestid:
+              schema:
+                type: string
+                example: d0Mgtg2zFiAEP_g=
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                status: 200
+                message: Successfully parsed the block.
+                data:
+                  - []
   /v2/polygon/nfts/{ft_contract}/uri/{token_id}:
     get:
       tags:
@@ -10061,6 +10218,809 @@ paths:
                 data:
                   uri: >-
                     https://gateway.pinata.cloud/ipfs/Qma651vJiey2Kec22exdQ5qrZkQ3dDCzitpJLdjqDxnXRk
+  /v2/polygon/nfts/{contract}/owner/{token_id}:
+    get:
+      tags:
+        - Polygon > Info Requests
+      summary: getNFTOwner
+      description: Get the Owner of an NFT
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: contract
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Polygon contract address
+          example: '0xd9186b67ae0d3ee0777a607eeb195c5a9fb0affcd78ddcd7481efae4b258c9f5'
+        - name: token_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          description: Polygon token id
+          example: '374'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:24:57 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '138'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            cache-control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            expires:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:24:57 GMT
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.1.12
+            set-cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=frpogbb9l5f8teaff1e5k1apvl; path=/; secure;
+                  httponly; samesite=lax
+            Apigw-Requestid:
+              schema:
+                type: string
+                example: d0OQfilGliAEPKQ=
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                status: 200
+                message: NFT Owner has been successfully parsed.
+                data:
+                  owner: '0xb4b4288cf43bb44923d1eae665a28e4e36e5fcae'
+  /v2/polygon/transactions/{transaction}/decoded:
+    get:
+      tags:
+        - Polygon > Info Requests
+      summary: getTransaction
+      description: >-
+        Get info about a transaction
+
+
+        You can choose if you want to get the Transaction encoded or decoded by
+        add /decoded to your request. See examlpes for details
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: transaction
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Transaction hash
+          example: '0x0b361c13214a0d498b69d6ea86039fdf8e578f4b6e3b28db52a422f8ed3ea037'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:27:33 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1565'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            cache-control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            expires:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:27:33 GMT
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.1.12
+            set-cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=o2lmi790evtg3j3i6frfkrdb0m; path=/; secure;
+                  httponly; samesite=lax
+            Apigw-Requestid:
+              schema:
+                type: string
+                example: d0Oo6hQxliAEPpg=
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: getTransactionReceipt (decoded)
+                  value:
+                    ok: true
+                    status: 200
+                    message: Successfully parsed transactionReceipt
+                    data:
+                      - blockHash: >-
+                          0xf50e3718d0ccb1c6bbfbef897a76d03afb39a88df8b400a04a1af47e3bb56100
+                        blockNumber: '14531579'
+                        cumulativeGasUsed: '3256893'
+                        effectiveGasPrice: '62.7216504860'
+                        from: '0x10416915232042d15d658bad8a01f7802012fa94'
+                        gasUsed: '63209'
+                        logs:
+                          - blockNumber: '14531579'
+                            transactionHash: >-
+                              0xa3f997774f21904a209727ee252b168646013c9c8560229cd087913ae7803088
+                            transactionIndex: '55'
+                            blockHash: >-
+                              0xf50e3718d0ccb1c6bbfbef897a76d03afb39a88df8b400a04a1af47e3bb56100
+                            logIndex: '65'
+                            removed: false
+                            function: transfer(address,uint256)
+                            sender: '0x10416915232042d15d658bad8a01f7802012fa94'
+                            receiver: '0xca063449da46e86acc4cca5ec1f29133e7c19306'
+                            type: ERC20
+                            contractaddress: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+                            amount: '50.000000'
+                            decimals: 6
+                        logsBloom: >-
+                          0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000208000000000000000000000000000000000000000000000000100000000000000000000008000080000000000000000000000000000000000000000000000002000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000004000000000000000000000000000
+                        status: true
+                        to: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+                        transactionHash: >-
+                          0xa3f997774f21904a209727ee252b168646013c9c8560229cd087913ae7803088
+                        transactionIndex: '55'
+                        type: '55'
+                example-1:
+                  summary: getTransactionReceipt (encoded)
+                  value:
+                    ok: true
+                    status: 200
+                    message: Successfully parsed transactionReceipt
+                    data:
+                      - blockHash: >-
+                          0xf50e3718d0ccb1c6bbfbef897a76d03afb39a88df8b400a04a1af47e3bb56100
+                        blockNumber: '14531579'
+                        cumulativeGasUsed: '3256893'
+                        effectiveGasPrice: '62.7216504860'
+                        from: '0x10416915232042d15d658bad8a01f7802012fa94'
+                        gasUsed: '63209'
+                        logs:
+                          - address: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+                            topics:
+                              - >-
+                                0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+                              - >-
+                                0x00000000000000000000000010416915232042d15d658bad8a01f7802012fa94
+                              - >-
+                                0x000000000000000000000000ca063449da46e86acc4cca5ec1f29133e7c19306
+                            data: >-
+                              0x0000000000000000000000000000000000000000000000000000000002faf080
+                            blockNumber: '0xddbbfb'
+                            transactionHash: >-
+                              0xa3f997774f21904a209727ee252b168646013c9c8560229cd087913ae7803088
+                            transactionIndex: '0x37'
+                            blockHash: >-
+                              0xf50e3718d0ccb1c6bbfbef897a76d03afb39a88df8b400a04a1af47e3bb56100
+                            logIndex: '0x41'
+                            removed: false
+                        logsBloom: >-
+                          0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000208000000000000000000000000000000000000000000000000100000000000000000000008000080000000000000000000000000000000000000000000000002000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000004000000000000000000000000000
+                        status: true
+                        to: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+                        transactionHash: >-
+                          0xa3f997774f21904a209727ee252b168646013c9c8560229cd087913ae7803088
+                        transactionIndex: '55'
+                        type: '55'
+  /v2/polygon/transactions/{transaction}/receipt/decoded:
+    get:
+      tags:
+        - Polygon > Info Requests
+      summary: getTransactionReceipt
+      description: >-
+        Get info about a transaction receipt
+
+
+        You can choose if you want to get the Transaction encoded or decoded by
+        add /decoded to your request. See examlpes for details
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: transaction
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Transaction hash
+          example: '0x0b361c13214a0d498b69d6ea86039fdf8e578f4b6e3b28db52a422f8ed3ea037'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:27:33 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1565'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            cache-control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            expires:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:27:33 GMT
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.1.12
+            set-cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=o2lmi790evtg3j3i6frfkrdb0m; path=/; secure;
+                  httponly; samesite=lax
+            Apigw-Requestid:
+              schema:
+                type: string
+                example: d0Oo6hQxliAEPpg=
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: getTransactionReceipt (decoded)
+                  value:
+                    ok: true
+                    status: 200
+                    message: Successfully parsed transactionReceipt
+                    data:
+                      - blockHash: >-
+                          0xf50e3718d0ccb1c6bbfbef897a76d03afb39a88df8b400a04a1af47e3bb56100
+                        blockNumber: '14531579'
+                        cumulativeGasUsed: '3256893'
+                        effectiveGasPrice: '62.7216504860'
+                        from: '0x10416915232042d15d658bad8a01f7802012fa94'
+                        gasUsed: '63209'
+                        logs:
+                          - blockNumber: '14531579'
+                            transactionHash: >-
+                              0xa3f997774f21904a209727ee252b168646013c9c8560229cd087913ae7803088
+                            transactionIndex: '55'
+                            blockHash: >-
+                              0xf50e3718d0ccb1c6bbfbef897a76d03afb39a88df8b400a04a1af47e3bb56100
+                            logIndex: '65'
+                            removed: false
+                            function: transfer(address,uint256)
+                            sender: '0x10416915232042d15d658bad8a01f7802012fa94'
+                            receiver: '0xca063449da46e86acc4cca5ec1f29133e7c19306'
+                            type: ERC20
+                            contractaddress: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+                            amount: '50.000000'
+                            decimals: 6
+                        logsBloom: >-
+                          0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000208000000000000000000000000000000000000000000000000100000000000000000000008000080000000000000000000000000000000000000000000000002000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000004000000000000000000000000000
+                        status: true
+                        to: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+                        transactionHash: >-
+                          0xa3f997774f21904a209727ee252b168646013c9c8560229cd087913ae7803088
+                        transactionIndex: '55'
+                        type: '55'
+                example-1:
+                  summary: getTransactionReceipt (encoded)
+                  value:
+                    ok: true
+                    status: 200
+                    message: Successfully parsed transactionReceipt
+                    data:
+                      - blockHash: >-
+                          0xf50e3718d0ccb1c6bbfbef897a76d03afb39a88df8b400a04a1af47e3bb56100
+                        blockNumber: '14531579'
+                        cumulativeGasUsed: '3256893'
+                        effectiveGasPrice: '62.7216504860'
+                        from: '0x10416915232042d15d658bad8a01f7802012fa94'
+                        gasUsed: '63209'
+                        logs:
+                          - address: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+                            topics:
+                              - >-
+                                0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+                              - >-
+                                0x00000000000000000000000010416915232042d15d658bad8a01f7802012fa94
+                              - >-
+                                0x000000000000000000000000ca063449da46e86acc4cca5ec1f29133e7c19306
+                            data: >-
+                              0x0000000000000000000000000000000000000000000000000000000002faf080
+                            blockNumber: '0xddbbfb'
+                            transactionHash: >-
+                              0xa3f997774f21904a209727ee252b168646013c9c8560229cd087913ae7803088
+                            transactionIndex: '0x37'
+                            blockHash: >-
+                              0xf50e3718d0ccb1c6bbfbef897a76d03afb39a88df8b400a04a1af47e3bb56100
+                            logIndex: '0x41'
+                            removed: false
+                        logsBloom: >-
+                          0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000208000000000000000000000000000000000000000000000000100000000000000000000008000080000000000000000000000000000000000000000000000002000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000004000000000000000000000000000
+                        status: true
+                        to: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+                        transactionHash: >-
+                          0xa3f997774f21904a209727ee252b168646013c9c8560229cd087913ae7803088
+                        transactionIndex: '55'
+                        type: '55'
+  /v2/polygon/addresses:
+    post:
+      tags:
+        - Polygon > Address Requests
+      summary: newAddress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                password: test123
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:46:50 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '160'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            cache-control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            expires:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:46:50 GMT
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.1.12
+            set-cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=ai8rkh1s0fqdou11ros8n4kdee; path=/; secure;
+                  httponly; samesite=lax
+            Apigw-Requestid:
+              schema:
+                type: string
+                example: d0RdSg89FiAEPUw=
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                status: 200
+                message: Success! Ethereum Address was successfully created.
+                data:
+                  ethereumaddress: '0xfa343ee01667869cfb409b24ae33f7ce8b110eb0'
+    get:
+      tags:
+        - Polygon > Address Requests
+      summary: listAddresses
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Apr 2022 09:39:38 GMT
+            Expires:
+              schema:
+                type: string
+                example: Wed, 06 Apr 2022 09:39:38 GMT
+            Server:
+              schema:
+                type: string
+                example: Caddy
+            Set-Cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=lobjp22shmqfgkvacp1n7eeth3; path=/; secure;
+                  httponly; samesite=lax
+            Content-Length:
+              schema:
+                type: integer
+                example: '252'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                status: 200
+                message: Success! Ethereum Addresses has been successfully parsed.
+                data:
+                  addresses:
+                    - '0x71892889ed4d79d88ab6ea3783b571b8ece9bef4'
+                    - '0xcc80850f15859984308f307126071c07060cd909'
+                    - '0xf4057adb50b933f50cc0f9bf86a242384d8c6d25'
+  /v2/polygon/addresses/{address}:
+    delete:
+      tags:
+        - Polygon > Address Requests
+      summary: deleteAddress
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: address
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Polygon address
+          example: '0xfa343ee01667869cfb409b24ae33f7ce8b110eb0'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:51:52 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '180'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.1.12
+            cache-control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            expires:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:51:52 GMT
+            set-cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=u7mk10gms4eomvveegkg19qg9p; path=/; secure;
+                  httponly; samesite=lax
+            Apigw-Requestid:
+              schema:
+                type: string
+                example: d0SMzhiBFiAEPtA=
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                status: 200
+                message: Success! Ethereum Address has been successfully deleted.
+                data:
+                  ethereumaddress: '0xfa343ee01667869cfb409b24ae33f7ce8b110eb0'
+                  deleted: true
+        '422':
+          description: Unprocessable Entity
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:51:15 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '189'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.1.12
+            cache-control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            expires:
+              schema:
+                type: string
+                example: Tue, 27 Dec 2022 17:51:15 GMT
+            set-cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=47p4cnkt7e0is1os0f2nk7467f; path=/; secure;
+                  httponly; samesite=lax
+            Apigw-Requestid:
+              schema:
+                type: string
+                example: d0SHGgWfFiAEPkA=
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: false
+                status: 422
+                message: >-
+                  Error! Invalid password. Please provide the correct one or
+                  contact the support.
+                data:
+                  ethereumaddress: '0xfa343ee01667869cfb409b24ae33f7ce8b110eb0'
+  /v2/polygon/addresses/import:
+    post:
+      tags:
+        - Polygon > Address Requests
+      summary: importAddress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                filename: >-
+                  UTC--2020-09-19T10-42-26.196Z--71892889ed4d79d88ab6ea3783b571b8ece9bef4
+                content:
+                  version: 3
+                  id: 85b790ff-408e-42b8-b123-bec9523964dc
+                  address: 71892889ed4d79d88ab6ea3783b571b8ece9bef4
+                  crypto:
+                    ciphertext: >-
+                      9d74262517b984f9b0560b8f23b5e3340f7be0f56b70cd91ff445dcaf5b1968f
+                    cipherparams:
+                      iv: 76e6f2497b9f2a8e024fc752a5418a6d
+                    cipher: aes-128-ctr
+                    kdf: scrypt
+                    kdfparams:
+                      dklen: 32
+                      salt: >-
+                        d11d996a7cc4bfad730d4c9b9057eff2c0fb3940b5bfc59db62ae218c14a54f4
+                      'n': 131072
+                      r: 8
+                      p: 1
+                    mac: >-
+                      dcc342bbbbb8eea97c89b47bafc23de568fc1a48e0bd21ae8d776a95c4704ac9
+                password: padN39QkRA2hJ
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Apr 2022 09:41:51 GMT
+            Expires:
+              schema:
+                type: string
+                example: Wed, 06 Apr 2022 09:41:51 GMT
+            Server:
+              schema:
+                type: string
+                example: Caddy
+            Set-Cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=9700cm7vkouo7640pkrs2hbobd; path=/; secure;
+                  httponly; samesite=lax
+            Content-Length:
+              schema:
+                type: integer
+                example: '158'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                status: 200
+                message: Success! Ethereum address has been successfully imported.
+                data:
+                  address: '0x71892889ed4d79d88ab6ea3783b571b8ece9bef4'
+  /v2/polygon/addresses/export/{address}:
+    post:
+      tags:
+        - Polygon > Address Requests
+      summary: exportAddress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: address
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Polygon address
+          example: '0xfa343ee01667869cfb409b24ae33f7ce8b110eb0'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Apr 2022 09:42:24 GMT
+            Expires:
+              schema:
+                type: string
+                example: Wed, 06 Apr 2022 09:42:24 GMT
+            Server:
+              schema:
+                type: string
+                example: Caddy
+            Set-Cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=c6d95cej64jj67n37rimfgo2ht; path=/; secure;
+                  httponly; samesite=lax
+            Content-Length:
+              schema:
+                type: integer
+                example: '745'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                status: 200
+                message: Success! Ethereum address has been successfully exported.
+                data:
+                  address: '0x71892889ed4d79d88ab6ea3783b571b8ece9bef4'
+                  filename: >-
+                    UTC--2020-09-19T10-42-26.196Z--71892889ed4d79d88ab6ea3783b571b8ece9bef4
+                  content:
+                    version: 3
+                    id: 85b790ff-408e-42b8-b123-bec9523964dc
+                    address: 71892889ed4d79d88ab6ea3783b571b8ece9bef4
+                    crypto:
+                      ciphertext: >-
+                        9d74262517b984f9b0560b8f23b5e3340f7be0f56b70cd91ff445dcaf5b1968f
+                      cipherparams:
+                        iv: 76e6f2497b9f2a8e024fc752a5418a6d
+                      cipher: aes-128-ctr
+                      kdf: scrypt
+                      kdfparams:
+                        dklen: 32
+                        salt: >-
+                          d11d996a7cc4bfad730d4c9b9057eff2c0fb3940b5bfc59db62ae218c14a54f4
+                        'n': 131072
+                        r: 8
+                        p: 1
+                      mac: >-
+                        dcc342bbbbb8eea97c89b47bafc23de568fc1a48e0bd21ae8d776a95c4704ac9
   /v2/polygon/addresses/{address}/transactions/{page}:
     get:
       tags:
@@ -17744,7 +18704,267 @@ paths:
                     type: ETH
                     tokenId: null
                     url: https://example.com/ipnreceiver.php
-  /v2/ethereum/webhooks/notifications/failed/{notification_id}:
+    get:
+      tags:
+        - Polygon > Webhooks/IPN Requests
+      summary: listSubscribedAddresses
+      description: Returns all subscriptions/IPNs created with an account.
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Wed, 28 Dec 2022 09:37:15 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '771'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            expires:
+              schema:
+                type: string
+                example: Wed, 28 Dec 2022 09:37:15 GMT
+            X-Powered-By:
+              schema:
+                type: string
+                example: PHP/8.1.12
+            cache-control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            set-cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=vd3o4pqkmvon58nofpvtn0gr1v; path=/; secure;
+                  httponly; samesite=lax
+            Apigw-Requestid:
+              schema:
+                type: string
+                example: d2crvjcnFiAEMKQ=
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                status: 200
+                message: Success! IPNs could be successfully parsed.
+                data:
+                  ipns:
+                    - id: 63a999fea9145dd56201bcd2
+                      bbid: 1
+                      from: null
+                      to: '0xa9d1e08c7793af67e9d92fe308d5697fb81d3e43'
+                      contractaddress: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+                      type: ERC20
+                      tokenId: null
+                      url: >-
+                        https://webhook.site/505eaba1-550e-49b4-ae5b-ba1361b2796d
+                    - id: 63ab324d8b4afe90980a3943
+                      bbid: 1
+                      from: null
+                      to: '0x2fE7dF4DAd91Ef6531Cd14fC1C109D2bA1755203'
+                      contractaddress: null
+                      type: ETH
+                      tokenId: null
+                      url: https://example.com/ipnreceiver.php
+                    - id: 63ac0bf4892bd772fe07eec1
+                      bbid: 1
+                      from: null
+                      to: '0x2fE7dF4DAd91Ef6531Cd14fC1C109D2bA1755203'
+                      contractaddress: null
+                      type: ETH
+                      tokenId: null
+                      url: https://example.com/ipnreceiver.php
+  /v2/polygon/webhooks/{webhook}:
+    delete:
+      tags:
+        - Polygon > Webhooks/IPN Requests
+      summary: unsubscribeAddress
+      description: >-
+        Deletes an existing subscription/IPN for the given address (and
+        contractaddress).
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: webhook
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Webhook Id
+          example: 626407c62e5e8235ca561dce
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 23 Apr 2022 13:52:58 GMT
+            Expires:
+              schema:
+                type: string
+                example: Sat, 23 Apr 2022 13:52:58 GMT
+            Server:
+              schema:
+                type: string
+                example: Caddy
+            Set-Cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=dd7gfok9cp3rmchksaoldh7rrr; path=/; secure;
+                  httponly; samesite=lax
+            Content-Length:
+              schema:
+                type: integer
+                example: '120'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                status: 200
+                message: Successfully unsubscribed to IPN!.
+                data:
+                  webhook_id: 626404965c833c09a81f56a8
+  /v2/polygon/webkhooks/{webhook}/notifications/failed:
+    get:
+      tags:
+        - Polygon > Webhooks/IPN Requests
+      summary: listFailedIPNs
+      description: Returns all subscriptions/IPNs created with an account.
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: webhook
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Webhook Id
+          example: 626407c62e5e8235ca561dce
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Sat, 19 Sep 2020 12:36:11 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache
+            Content-Length:
+              schema:
+                type: integer
+                example: '297'
+            Connection:
+              schema:
+                type: string
+                example: close
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                failed_ipns:
+                  - id: '17766'
+                    timestamp: '2020-09-19 14:33:01'
+                    ethereumaddress: '0xa2107fa5b38d9bbd2c461d6edf11b11a50f6b974'
+                    contractaddress: '0x514910771af9ca656af840dff83e8264ecf986ca'
+                    amount: '496588.7771277759'
+                    url: https://yoururl.com/ipnreceiver.php
+                    action: deposit
+  /v2/polygon/webkhooks/notifications/failed:
+    get:
+      tags:
+        - Polygon > Webhooks/IPN Requests
+      summary: listIPNsByWebhookId
+      description: Returns all subscriptions/IPNs created with an account.
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Sat, 19 Sep 2020 12:36:11 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache
+            Content-Length:
+              schema:
+                type: integer
+                example: '297'
+            Connection:
+              schema:
+                type: string
+                example: close
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                failed_ipns:
+                  - id: '17766'
+                    timestamp: '2020-09-19 14:33:01'
+                    ethereumaddress: '0xa2107fa5b38d9bbd2c461d6edf11b11a50f6b974'
+                    contractaddress: '0x514910771af9ca656af840dff83e8264ecf986ca'
+                    amount: '496588.7771277759'
+                    url: https://yoururl.com/ipnreceiver.php
+                    action: deposit
+  /v2/polygon/webhooks/notifications/failed/{notification_id}:
     post:
       tags:
         - Polygon > Webhooks/IPN Requests
@@ -17813,6 +19033,89 @@ paths:
                 message: Success! IPN successfully got resent.
                 data:
                   notification_id: 62640817eb594da78c7bee00
+  /v2/polygon/transactions/erc20:
+    post:
+      tags:
+        - Polygon > Transaction Requests
+      summary: sendERC20
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                from: '0xa1f36016221d48ce7f15cde7b826a4fbe09bacce'
+                contractaddress: '0x55d398326f99059fF775485246999027B3197955'
+                to: '0xef4943d727e34280a2efa0b3352dfd61f508ee48'
+                amount: 0.1
+                password: test123
+                gas: 0
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/polygon/transactions/erc721:
+    post:
+      tags:
+        - Polygon > Transaction Requests
+      summary: sendERC721
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+              example: >-
+                "{\r\n    \"from\":
+                \"0xa1f36016221d48ce7f15cde7b826a4fbe09bacce\",\r\n   
+                \"contractaddress\":
+                \"0x55d398326f99059fF775485246999027B3197955\",\r\n    \"to\":
+                \"0xef4943d727e34280a2efa0b3352dfd61f508ee48\",\r\n   
+                \"tokenid\": 123, \r\n    \"password\": \"test123\"\r\n}"
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/polygon/transactions:
+    post:
+      tags:
+        - Polygon > Transaction Requests
+      summary: sendTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                from: '0xa1f36016221d48ce7f15cde7b826a4fbe09bacce'
+                to: '0xef4943d727e34280a2efa0b3352dfd61f508ee48'
+                amount: '0.1'
+                password: test123
+                gas: 0
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
   /v2/polygon/transactions/broadcast:
     post:
       tags:
@@ -35558,7 +36861,7 @@ paths:
   /v2/tron/webhooks:
     post:
       tags:
-        - Bitcoin > Webhooks/IPN Requests
+        - Tron > Webhooks/IPN Requests
       summary: subscribeAddress
       description: "Creates a new subscription/IPN for the given address (and contractaddress). You will receive a notification to the given url every time a deposit is received. Unsubscribe the address before sending tokens/ETH from it or you won't get reliable notifications anymore.\r\n"
       requestBody:
@@ -42847,6 +44150,138 @@ paths:
                     message: Error! Something went wrong while sending transaction.
                     data:
                       error: Insufficient funds
+  /v2/bitcoin/webhooks:
+    post:
+      tags:
+        - Bitcoin > Webhooks/IPN Requests
+      summary: subscribeAddress
+      description: "Creates a new subscription/IPN for the given address (and contractaddress). You will receive a notification to the given url every time a deposit is received. Unsubscribe the address before sending tokens/ETH from it or you won't get reliable notifications anymore.\r\n"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                from: '{{tron_account}}'
+                url: https://yoururl.com/ipnreceiver.php
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Apr 2022 11:57:17 GMT
+            Expires:
+              schema:
+                type: string
+                example: Wed, 06 Apr 2022 11:57:17 GMT
+            Server:
+              schema:
+                type: string
+                example: Caddy
+            Set-Cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=le2m6b80s7qmhq7oulgmu9teph; path=/; secure;
+                  httponly; samesite=lax
+            Content-Length:
+              schema:
+                type: integer
+                example: '229'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                status: 200
+                message: Successfully subscribed to IPN!.
+                data:
+                  id: 624d801d4b026365cc22356c
+                  from: null
+                  to: TKchW737Ji3nSJQoP3rBnzTXxMXQ7AqXjs
+                  contractaddress: null
+                  tokenid: null
+                  type: null
+                  url: https://yoururl.com/ipnreceiver.php
+    get:
+      tags:
+        - Bitcoin > Webhooks/IPN Requests
+      summary: listSubscribedAddresses
+      description: Returns all subscriptions/IPNs created with an account.
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: max-age=0, must-revalidate, private
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Apr 2022 11:59:09 GMT
+            Expires:
+              schema:
+                type: string
+                example: Wed, 06 Apr 2022 11:59:09 GMT
+            Server:
+              schema:
+                type: string
+                example: Caddy
+            Set-Cookie:
+              schema:
+                type: string
+                example: >-
+                  PHPSESSID=9gh3l0hos80a2e6opj65rt1lu3; path=/; secure;
+                  httponly; samesite=lax
+            Content-Length:
+              schema:
+                type: integer
+                example: '251'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                ok: true
+                status: 200
+                message: Success! IPNs could be successfully parsed.
+                data:
+                  ipns:
+                    - id: 624d80774b026365cc22356e
+                      from: null
+                      to: null
+                      contractaddress: null
+                      tokenid: null
+                      type: null
+                      url: https://yoururl.com/ipnreceiver.php
   /v2/bitcoin/webhooks/{id}:
     delete:
       tags:
@@ -42912,69 +44347,6 @@ paths:
                 message: Successfully unsubscribed to IPN!.
                 data:
                   id: 624d80774b026365cc22356e
-  /v2/bitcoin/webhooks:
-    get:
-      tags:
-        - Bitcoin > Webhooks/IPN Requests
-      summary: listSubscribedAddresses
-      description: Returns all subscriptions/IPNs created with an account.
-      parameters:
-        - name: Accept
-          in: header
-          schema:
-            type: string
-          example: application/json
-      responses:
-        '200':
-          description: OK
-          headers:
-            Cache-Control:
-              schema:
-                type: string
-                example: max-age=0, must-revalidate, private
-            Content-Type:
-              schema:
-                type: string
-                example: application/json
-            Date:
-              schema:
-                type: string
-                example: Wed, 06 Apr 2022 11:59:09 GMT
-            Expires:
-              schema:
-                type: string
-                example: Wed, 06 Apr 2022 11:59:09 GMT
-            Server:
-              schema:
-                type: string
-                example: Caddy
-            Set-Cookie:
-              schema:
-                type: string
-                example: >-
-                  PHPSESSID=9gh3l0hos80a2e6opj65rt1lu3; path=/; secure;
-                  httponly; samesite=lax
-            Content-Length:
-              schema:
-                type: integer
-                example: '251'
-          content:
-            application/json:
-              schema:
-                type: object
-              example:
-                ok: true
-                status: 200
-                message: Success! IPNs could be successfully parsed.
-                data:
-                  ipns:
-                    - id: 624d80774b026365cc22356e
-                      from: null
-                      to: null
-                      contractaddress: null
-                      tokenid: null
-                      type: null
-                      url: https://yoururl.com/ipnreceiver.php
   /v2/bitcoin/webhooks/notifications/failed:
     get:
       tags:
