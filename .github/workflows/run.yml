@@ -41,7 +41,7 @@ jobs:
 
           git add -A
           git commit -m "updated openapi yaml file"
-          git push
+          git push 
       
       - uses: reggionick/s3-deploy@v3
         with:
