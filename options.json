@@ -10,8 +10,8 @@
             "email": "support@chaingateway.io"
         },
         "xLogo": {
-            "url": "logo.png",
-            "backgroundColor": "#FFFFFF",
+            "url": "https://chaingateway.io/assets/images/svg/nav-logo.svg",
+            "backgroundColor": "#000835",
             "altText": "Chaingateway Logo"
         }
     },
