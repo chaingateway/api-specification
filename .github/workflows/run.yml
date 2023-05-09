@@ -19,6 +19,9 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -27,9 +30,10 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Apply postman changes
-      - run: npm i postman-to-openapi -g
+      - run: npm i postman-to-openapi snippet-enricher-cli @redocly/cli@latest -g
       - run: p2o Chaingateway.io.postman_collection.json -f Chaingateway.io.openapi.yaml -o options.json
       - run: p2o Chaingateway.io.postman_collection.json -f Chaingateway.io.openapi.json -o options_json.json
+      - run: snippet-enricher-cli --input=Chaingateway.io.openapi.json > Chaingateway.io.openapi.examples.json
       - run: |
           git config --global user.name "Action Bot"
           git config --global user.email "support@chaingateway.io"
@@ -37,4 +41,16 @@ jobs:
           git add -A
           git commit -m "updated openapi yaml file"
           git push
+      
+      - uses: reggionick/s3-deploy@v3
+        with:
+          folder: /
+          bucket: ${{ secrets.S3_BUCKET }}
+          bucket-region: ${{ secrets.S3_BUCKET_REGION }}
+          dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+          invalidation: /
+          delete-removed: true
+          no-cache: true
+          private: true
+          files-to-include: "docs"
 
