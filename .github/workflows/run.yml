@@ -53,6 +53,6 @@ jobs:
           invalidation: /
           delete-removed: false
           no-cache: true
-          private: false
+          private: true
           filesToInclude: "docs"
 
