@@ -34,6 +34,7 @@ jobs:
       - run: p2o Chaingateway.io.postman_collection.json -f Chaingateway.io.openapi.yaml -o options.json
       - run: p2o Chaingateway.io.postman_collection.json -f Chaingateway.io.openapi.json -o options_json.json
       - run: snippet-enricher-cli --input=Chaingateway.io.openapi.json > Chaingateway.io.openapi.examples.json
+      - run: redocly build-docs Chaingateway.io.openapi.examples.json --output=docs
       - run: |
           git config --global user.name "Action Bot"
           git config --global user.email "support@chaingateway.io"
