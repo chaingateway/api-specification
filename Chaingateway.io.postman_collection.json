@@ -11272,7 +11272,75 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "freeze",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"tronaddress\": \"TPbJ4q2wZP2UpsE7ME3bxewS5pKAdWZwCj\", \n    \"privatekey\":\"92a5a62fdf7290244b564450f4ab10a5ea796f234aa6aded322c826ad40efb9c\", \n    \"duration\": 3,\n    \"resource\": \"ENERGY\",\n    \"amount\": \"0.0001\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{url}}/v2/tron/freeze",
+											"protocol": "https",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"v2",
+												"tron",
+												"freeze"
+											]
+										}
+									},
+									"status": "Unprocessable Content",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.18.0 (Ubuntu)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "max-age=0, must-revalidate, private"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 12 May 2023 11:04:54 GMT"
+										},
+										{
+											"key": "Expires",
+											"value": "Fri, 12 May 2023 11:04:54 GMT"
+										},
+										{
+											"key": "Set-Cookie",
+											"value": "PHPSESSID=tj8r30e4bjpkr1kirfosps5k37; path=/; secure; httponly; samesite=lax"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ok\": false,\n    \"status\": 422,\n    \"message\": \"Error! Something went wrong while freezing balance\",\n    \"data\": {\n        \"message\": \"class org.tron.core.exception.ContractValidateException : frozenBalance must be more than 1TRX\"\n    }\n}"
+								}
+							]
 						},
 						{
 							"name": "unfreeze",
@@ -11289,7 +11357,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://{{url}}/v2/tron/freeze",
+									"raw": "https://{{url}}/v2/tron/unfreeze",
 									"protocol": "https",
 									"host": [
 										"{{url}}"
@@ -11297,11 +11365,75 @@
 									"path": [
 										"v2",
 										"tron",
-										"freeze"
+										"unfreeze"
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "unfreeze",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"tronaddress\": \"TPbJ4q2wZP2UpsE7ME3bxewS5pKAdWZwCj\", \n    \"privatekey\":\"92a5a62fdf7290244b564450f4ab10a5ea796f234aa6aded322c826ad40efb9c\", \n    \"duration\": 3,\n    \"resource\": \"ENERGY\",\n    \"amount\": \"0.0001\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{url}}/v2/tron/unfreeze",
+											"protocol": "https",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"v2",
+												"tron",
+												"unfreeze"
+											]
+										}
+									},
+									"status": "Unprocessable Content",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.18.0 (Ubuntu)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "max-age=0, must-revalidate, private"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 12 May 2023 11:04:58 GMT"
+										},
+										{
+											"key": "Expires",
+											"value": "Fri, 12 May 2023 11:04:58 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"ok\": false,\n    \"status\": 422,\n    \"message\": \"Error! Something went wrong while unfreezing balance\",\n    \"data\": {\n        \"message\": \"class org.tron.core.exception.ContractValidateException : no frozenBalance(Energy)\"\n    }\n}"
+								}
+							]
 						}
 					]
 				}
