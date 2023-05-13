@@ -7037,7 +7037,7 @@
 									}
 								],
 								"url": {
-									"raw": "https://{{url}}/v2/bsc/balances/:contract/bep20/:token_id",
+									"raw": "https://{{url}}/v2/bsc/balances/:address/bep20/:contract",
 									"protocol": "https",
 									"host": [
 										"{{url}}"
@@ -7046,20 +7046,18 @@
 										"v2",
 										"bsc",
 										"balances",
-										":contract",
+										":address",
 										"bep20",
-										":token_id"
+										":contract"
 									],
 									"variable": [
 										{
-											"key": "contract",
-											"value": "0x1dDB2C0897daF18632662E71fdD2dbDC0eB3a9Ec",
-											"description": "BEP20 contract address"
+											"key": "address",
+											"value": "0xC3EBbE09c9cc4bF77A6F90687E5c292245Bc1090"
 										},
 										{
-											"key": "token_id",
-											"value": "0x9dB475371B5cC2913D3219f72e16a3F101339a05",
-											"description": "Token id"
+											"key": "contract",
+											"value": "0x31471E0791fCdbE82fbF4C44943255e923F1b794"
 										}
 									]
 								},
