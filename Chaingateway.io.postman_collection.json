@@ -13823,7 +13823,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"ok\": true,\n    \"status\": 200,\n    \"message\": \"Successfully subscribed to IPN!.\",\n    \"data\": {\n        \"ipn\": {\n            \"id\": \"6484dc02c11a0062f211438e\",\n            \"bbid\": 1,\n            \"from\": \"bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h\",\n            \"to\": null,\n            \"url\": \"https://yoururl.com/ipnreceiver.php\"\n        }\n    }\n}"
+									"body": "{\n    \"ok\": true,\n    \"status\": 200,\n    \"message\": \"Successfully subscribed to IPN!.\",\n    \"data\": {\n        \"id\": \"6484dc02c11a0062f211438e\"\n    }\n}"
 								}
 							]
 						},
