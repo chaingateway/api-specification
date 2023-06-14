@@ -1,11 +1,10 @@
 {
 	"info": {
-		"_postman_id": "ca20c329-0fc4-4c24-a0d0-550fd223a07f",
+		"_postman_id": "0bf65ff9-5173-4957-bb1a-e8add03c1720",
 		"name": "Chaingateway.io V2",
 		"description": "This API allows you to interact with Ethereum, Binance smart chain, Polygon and Tron blockchain. If you ever looked for a possibility to automate token or payments this is the right place.  \nYou still have no idea for real use cases? Let me give you some examples: Accept your own token as payment method for your shop, distribute airdrop tokens of your ICO, convert your site currency to a token that can be traded on exchanges and many more.  \nThere are a lot of use cases which are not only limited to sending tokens but also receiving them. You could even create a secure wallet for your token which only the wallet owner has access to. Additionally we offer a lot of functions for retrieving blockchain data, including transactions. Using our webhook system, it is possible to receive notifications when events on the blockchain occur, for example when a transfer to a specific address is happening.\n\n# Registering\n\nTo use this Blockchain API, you need to register for a free account on [Chaingateway.io](https://chaingateway.io)\n\nOnce you have created your account, you can create an API key in your Account panel to use with our API.\n\n# Postman\n\nPostman is a great software to test APIs, it helped us a lot when developing this API. If you haven't installed it yet, we recommend to do so\n\nWe have created a Postman collection that allows to import all functions and their settings, including descriptions in Postman. This way you can test all functions with the click of a button (just change the parameters before).\n\n# API Specifications\n\nFor many API clients, websites and development projects you may need a file which specifies all function endpoints of our API. These files can be found in our [Github repository](https://github.com/chaingateway/api-specification), always updated in the formats \"Postman Collection\" and \"OPENAPI/SWAGGER\".\n\n# Authorization\n\nYou can get your personal API Key from your account dashboard. It is used by us to determine who is accessing the API and to count the requests by that account. There are 2 possibilities to use it in your requests:\n\nAdd it in the HTTP header as\n\n`Authorization: q9PdaWuD4j6DK6vsUgehhL8pgarSrS9m`\n\nPlease do not share your api key! If you did so by mistake, immediately regenerate it in your account panel!",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26163449",
-		"_collection_link": "https://chaingateway-team.postman.co/workspace/Team-Workspace~f1e07241-d7a2-4dbe-8afd-fad22b3b2d4a/collection/26163449-ca20c329-0fc4-4c24-a0d0-550fd223a07f?action=share&creator=26163449&source=collection_link"
+		"_exporter_id": "26163449"
 	},
 	"item": [
 		{
@@ -2219,8 +2218,8 @@
 									}
 								},
 								"url": {
-									"raw": "https://{{url}}/v2/ethereum/addresses/export/:address",
-									"protocol": "https",
+									"raw": "http://{{url}}/v2/ethereum/addresses/export/:address",
+									"protocol": "http",
 									"host": [
 										"{{url}}"
 									],
@@ -2234,7 +2233,7 @@
 									"variable": [
 										{
 											"key": "address",
-											"value": "0xacc767f4042360c5f08c7b98bac8e66a5c679cef",
+											"value": "0xe70183ca7aee00a3fda06f662b95d22520cd832c",
 											"description": "0xe7114f0dbd5a5fa62ed2df905f7391c957ff9e36"
 										}
 									]
@@ -3134,7 +3133,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"from\": \"0xa1f36016221d48ce7f15cde7b826a4fbe09bacce\",\r\n    \"contractaddress\": \"0x55d398326f99059fF775485246999027B3197955\",\r\n    \"to\": \"0xef4943d727e34280a2efa0b3352dfd61f508ee48\",\r\n    \"amount\": 0.1, \r\n    \"password\": \"test123\",\r\n    \"gas\": 0\r\n}",
+									"raw": "{\r\n    \"from\": \"0x83ad4c6149903cab7d79a4dc683f746ce4ac60ca\",\r\n    \"contractaddress\": \"0xdAC17F958D2ee523a2206206994597C13D831ec7\",\r\n    \"maxFeePerGas\": 50,\r\n    \"maxPriorityFeePerGas\": 0.12,\r\n    \"to\": \"0x6e35af2907e2f67a84d9ef40657c31ce7da49208\",\r\n    \"amount\": \"0.1\", \r\n    \"password\": \"XyZZUY2xLZ8vCGtuMAeNrKDXhcYnHZoU\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -7037,7 +7036,7 @@
 									}
 								],
 								"url": {
-									"raw": "https://{{url}}/v2/bsc/balances/:address/bep20/:contract",
+									"raw": "https://{{url}}/v2/bsc/balances/:contract/bep20/:token_id",
 									"protocol": "https",
 									"host": [
 										"{{url}}"
@@ -7046,18 +7045,20 @@
 										"v2",
 										"bsc",
 										"balances",
-										":address",
+										":contract",
 										"bep20",
-										":contract"
+										":token_id"
 									],
 									"variable": [
 										{
-											"key": "address",
-											"value": "0xC3EBbE09c9cc4bF77A6F90687E5c292245Bc1090"
+											"key": "contract",
+											"value": "0x1dDB2C0897daF18632662E71fdD2dbDC0eB3a9Ec",
+											"description": "BEP20 contract address"
 										},
 										{
-											"key": "contract",
-											"value": "0x31471E0791fCdbE82fbF4C44943255e923F1b794"
+											"key": "token_id",
+											"value": "0x9dB475371B5cC2913D3219f72e16a3F101339a05",
+											"description": "Token id"
 										}
 									]
 								},
@@ -8217,7 +8218,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"ethereumaddress\": \"0xa2107fa5b38d9bbd2c461d6edf11b11a50f6b974\", \"contractaddress\": \"0x514910771af9ca656af840dff83e8264ecf986ca\", \"url\": \"https://yoururl.com/ipnreceiver.php\"}",
+									"raw": "{\"from\": \"0xa2107fa5b38d9bbd2c461d6edf11b11a50f6b974\", \"contract\": \"0x514910771af9ca656af840dff83e8264ecf986ca\", \"url\": \"https://yoururl.com/ipnreceiver.php\"}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -11270,75 +11271,7 @@
 									]
 								}
 							},
-							"response": [
-								{
-									"name": "freeze",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"tronaddress\": \"TPbJ4q2wZP2UpsE7ME3bxewS5pKAdWZwCj\", \n    \"privatekey\":\"92a5a62fdf7290244b564450f4ab10a5ea796f234aa6aded322c826ad40efb9c\", \n    \"duration\": 3,\n    \"resource\": \"ENERGY\",\n    \"amount\": \"0.0001\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "https://{{url}}/v2/tron/freeze",
-											"protocol": "https",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"v2",
-												"tron",
-												"freeze"
-											]
-										}
-									},
-									"status": "Unprocessable Content",
-									"code": 422,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Server",
-											"value": "nginx/1.18.0 (Ubuntu)"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										},
-										{
-											"key": "Transfer-Encoding",
-											"value": "chunked"
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive"
-										},
-										{
-											"key": "Cache-Control",
-											"value": "max-age=0, must-revalidate, private"
-										},
-										{
-											"key": "Date",
-											"value": "Fri, 12 May 2023 11:04:54 GMT"
-										},
-										{
-											"key": "Expires",
-											"value": "Fri, 12 May 2023 11:04:54 GMT"
-										},
-										{
-											"key": "Set-Cookie",
-											"value": "PHPSESSID=tj8r30e4bjpkr1kirfosps5k37; path=/; secure; httponly; samesite=lax"
-										}
-									],
-									"cookie": [],
-									"body": "{\n    \"ok\": false,\n    \"status\": 422,\n    \"message\": \"Error! Something went wrong while freezing balance\",\n    \"data\": {\n        \"message\": \"class org.tron.core.exception.ContractValidateException : frozenBalance must be more than 1TRX\"\n    }\n}"
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "unfreeze",
@@ -11347,7 +11280,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"tronaddress\": \"TPbJ4q2wZP2UpsE7ME3bxewS5pKAdWZwCj\", \n    \"privatekey\":\"92a5a62fdf7290244b564450f4ab10a5ea796f234aa6aded322c826ad40efb9c\", \n    \"duration\": 3,\n    \"resource\": \"ENERGY\",\n    \"amount\": \"0.0001\"\n}",
+									"raw": "{\n    \"tronaddress\": \"TPbJ4q2wZP2UpsE7ME3bxewS5pKAdWZwCj\", \n    \"privatekey\":\"92a5a62fdf7290244b564450f4ab10a5ea796f234aa6aded322c826ad40efb9c\", \n    \"resource\": \"ENERGY\",\n    \"amount\": \"1\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -11367,71 +11300,7 @@
 									]
 								}
 							},
-							"response": [
-								{
-									"name": "unfreeze",
-									"originalRequest": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"tronaddress\": \"TPbJ4q2wZP2UpsE7ME3bxewS5pKAdWZwCj\", \n    \"privatekey\":\"92a5a62fdf7290244b564450f4ab10a5ea796f234aa6aded322c826ad40efb9c\", \n    \"duration\": 3,\n    \"resource\": \"ENERGY\",\n    \"amount\": \"0.0001\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "https://{{url}}/v2/tron/unfreeze",
-											"protocol": "https",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"v2",
-												"tron",
-												"unfreeze"
-											]
-										}
-									},
-									"status": "Unprocessable Content",
-									"code": 422,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Server",
-											"value": "nginx/1.18.0 (Ubuntu)"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										},
-										{
-											"key": "Transfer-Encoding",
-											"value": "chunked"
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive"
-										},
-										{
-											"key": "Cache-Control",
-											"value": "max-age=0, must-revalidate, private"
-										},
-										{
-											"key": "Date",
-											"value": "Fri, 12 May 2023 11:04:58 GMT"
-										},
-										{
-											"key": "Expires",
-											"value": "Fri, 12 May 2023 11:04:58 GMT"
-										}
-									],
-									"cookie": [],
-									"body": "{\n    \"ok\": false,\n    \"status\": 422,\n    \"message\": \"Error! Something went wrong while unfreezing balance\",\n    \"data\": {\n        \"message\": \"class org.tron.core.exception.ContractValidateException : no frozenBalance(Energy)\"\n    }\n}"
-								}
-							]
+							"response": []
 						}
 					]
 				}
@@ -13765,16 +13634,11 @@
 												"name": "Content-Type",
 												"value": "application/json",
 												"type": "text"
-											},
-											{
-												"key": "Authorization",
-												"value": "APIKEY",
-												"type": "text"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"url\": \"https://yoururl.com/ipnreceiver.php\",\r\n    \"to\": \"TKchW737Ji3nSJQoP3rBnzTXxMXQ7AqXjs\"\r\n}",
+											"raw": "{\n    \"from\": \"bc1p9epu6ncmc6eq5eh87xp6cxmc0v3v60r0lju8rsjn68kjv3yy72pqctgemt\",\n    \"url\": \"https://yoururl.com/ipnreceiver.php\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -13799,36 +13663,36 @@
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
-											"key": "Cache-Control",
-											"value": "max-age=0, must-revalidate, private"
+											"key": "Server",
+											"value": "nginx/1.18.0 (Ubuntu)"
 										},
 										{
 											"key": "Content-Type",
 											"value": "application/json"
 										},
 										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "max-age=0, must-revalidate, private"
+										},
+										{
 											"key": "Date",
-											"value": "Wed, 06 Apr 2022 11:57:17 GMT"
+											"value": "Wed, 14 Jun 2023 14:18:31 GMT"
 										},
 										{
 											"key": "Expires",
-											"value": "Wed, 06 Apr 2022 11:57:17 GMT"
-										},
-										{
-											"key": "Server",
-											"value": "Caddy"
-										},
-										{
-											"key": "Set-Cookie",
-											"value": "PHPSESSID=le2m6b80s7qmhq7oulgmu9teph; path=/; secure; httponly; samesite=lax"
-										},
-										{
-											"key": "Content-Length",
-											"value": "229"
+											"value": "Wed, 14 Jun 2023 14:18:31 GMT"
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"ok\": true,\n    \"status\": 200,\n    \"message\": \"Successfully subscribed to IPN!.\",\n    \"data\": {\n        \"id\": \"624d801d4b026365cc22356c\",\n        \"from\": null,\n        \"to\": \"TKchW737Ji3nSJQoP3rBnzTXxMXQ7AqXjs\",\n        \"contractaddress\": null,\n        \"tokenid\": null,\n        \"type\": null,\n        \"url\": \"https://yoururl.com/ipnreceiver.php\"\n    }\n}"
+									"body": "{\n    \"ok\": true,\n    \"status\": 200,\n    \"message\": \"Successfully subscribed to IPN!.\",\n    \"data\": {\n        \"id\": \"6489cc371225f81620508bae\"\n    }\n}"
 								}
 							]
 						},
@@ -14012,13 +13876,17 @@
 												"name": "Content-Type",
 												"value": "application/json",
 												"type": "text"
-											},
-											{
-												"key": "Authorization",
-												"value": "APIKEY",
-												"type": "text"
 											}
 										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
 											"raw": "https://{{url}}/v2/bitcoin/webhooks",
 											"protocol": "https",
@@ -14037,36 +13905,36 @@
 									"_postman_previewlanguage": "json",
 									"header": [
 										{
-											"key": "Cache-Control",
-											"value": "max-age=0, must-revalidate, private"
+											"key": "Server",
+											"value": "nginx/1.18.0 (Ubuntu)"
 										},
 										{
 											"key": "Content-Type",
 											"value": "application/json"
 										},
 										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "max-age=0, must-revalidate, private"
+										},
+										{
 											"key": "Date",
-											"value": "Wed, 06 Apr 2022 11:59:09 GMT"
+											"value": "Wed, 14 Jun 2023 14:19:13 GMT"
 										},
 										{
 											"key": "Expires",
-											"value": "Wed, 06 Apr 2022 11:59:09 GMT"
-										},
-										{
-											"key": "Server",
-											"value": "Caddy"
-										},
-										{
-											"key": "Set-Cookie",
-											"value": "PHPSESSID=9gh3l0hos80a2e6opj65rt1lu3; path=/; secure; httponly; samesite=lax"
-										},
-										{
-											"key": "Content-Length",
-											"value": "251"
+											"value": "Wed, 14 Jun 2023 14:19:13 GMT"
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"ok\": true,\n    \"status\": 200,\n    \"message\": \"Success! IPNs could be successfully parsed.\",\n    \"data\": {\n        \"ipns\": [\n            {\n                \"id\": \"624d80774b026365cc22356e\",\n                \"from\": null,\n                \"to\": null,\n                \"contractaddress\": null,\n                \"tokenid\": null,\n                \"type\": null,\n                \"url\": \"https://yoururl.com/ipnreceiver.php\"\n            }\n        ]\n    }\n}"
+									"body": "{\n    \"ok\": true,\n    \"status\": 200,\n    \"message\": \"Success! IPNs could be successfully parsed.\",\n    \"data\": {\n        \"ipns\": [\n            {\n                \"id\": \"641aaea1a16abd705f0293e9\",\n                \"bbid\": 1,\n                \"from\": \"bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h\",\n                \"to\": null,\n                \"url\": \"https://api.chaingateway.io/receiver/webhooks/bitcoin\"\n            },\n            {\n                \"id\": \"6489c9b9246aed0b360c91ef\",\n                \"bbid\": 1,\n                \"from\": \"bc1p9epu6ncmc6eq5eh87xp6cxmc0v3v60r0lju8rsjn68kjv3yy72pqctgemt\",\n                \"to\": null,\n                \"url\": \"https://yoururl.com/ipnreceiver.php\"\n            },\n            {\n                \"id\": \"6489ca04246aed0b360c91f6\",\n                \"bbid\": 1,\n                \"from\": \"bc1p9epu6ncmc6eq5eh87xp6cxmc0v3v60r0lju8rsjn68kjv3yy72pqctgemt\",\n                \"to\": null,\n                \"url\": \"https://yoururl.com/ipnreceiver.php\"\n            },\n            {\n                \"id\": \"6489caa9246aed0b360c9203\",\n                \"bbid\": 1,\n                \"from\": \"bc1p9epu6ncmc6eq5eh87xp6cxmc0v3v60r0lju8rsjn68kjv3yy72pqctgemt\",\n                \"to\": null,\n                \"url\": \"https://yoururl.com/ipnreceiver.php\"\n            },\n            {\n                \"id\": \"6489cac61534b94baf50390f\",\n                \"bbid\": 1,\n                \"from\": \"bc1p9epu6ncmc6eq5eh87xp6cxmc0v3v60r0lju8rsjn68kjv3yy72pqctgemt\",\n                \"to\": null,\n                \"url\": \"https://yoururl.com/ipnreceiver.php\"\n            },\n            {\n                \"id\": \"6489cac9246aed0b360c9206\",\n                \"bbid\": 1,\n                \"from\": \"bc1p9epu6ncmc6eq5eh87xp6cxmc0v3v60r0lju8rsjn68kjv3yy72pqctgemt\",\n                \"to\": null,\n                \"url\": \"https://yoururl.com/ipnreceiver.php\"\n            },\n            {\n                \"id\": \"6489caec246aed0b360c920a\",\n                \"bbid\": 1,\n                \"from\": \"bc1p9epu6ncmc6eq5eh87xp6cxmc0v3v60r0lju8rsjn68kjv3yy72pqctgemt\",\n                \"to\": null,\n                \"url\": \"https://yoururl.com/ipnreceiver.php\"\n            },\n            {\n                \"id\": \"6489cb42246aed0b360c9212\",\n                \"bbid\": 1,\n                \"from\": \"bc1p9epu6ncmc6eq5eh87xp6cxmc0v3v60r0lju8rsjn68kjv3yy72pqctgemt\",\n                \"to\": null,\n                \"url\": \"https://yoururl.com/ipnreceiver.php\"\n            },\n            {\n                \"id\": \"6489cb44f53e383a3830a3e9\",\n                \"bbid\": 1,\n                \"from\": \"bc1p9epu6ncmc6eq5eh87xp6cxmc0v3v60r0lju8rsjn68kjv3yy72pqctgemt\",\n                \"to\": null,\n                \"url\": \"https://yoururl.com/ipnreceiver.php\"\n            },\n            {\n                \"id\": \"6489cc371225f81620508bae\",\n                \"bbid\": 1,\n                \"from\": \"bc1p9epu6ncmc6eq5eh87xp6cxmc0v3v60r0lju8rsjn68kjv3yy72pqctgemt\",\n                \"to\": null,\n                \"url\": \"https://yoururl.com/ipnreceiver.php\"\n            }\n        ]\n    }\n}"
 								}
 							]
 						},
@@ -14110,69 +13978,7 @@
 								},
 								"description": "Returns all subscriptions/IPNs created with an account."
 							},
-							"response": [
-								{
-									"name": "listFailedIPNs",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Content-Type",
-												"name": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"description": "API Key",
-												"key": "Authorization",
-												"type": "text",
-												"value": "q9PdaWuD4j6DK6vsUgehhL8pgarSrS9m"
-											}
-										],
-										"url": {
-											"raw": "https://{{url}}/v2/bitcoin/webhooks/notifications/failed",
-											"protocol": "https",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"v2",
-												"bitcoin",
-												"webhooks",
-												"notifications",
-												"failed"
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Date",
-											"value": "Sat, 19 Sep 2020 12:36:11 GMT"
-										},
-										{
-											"key": "Server",
-											"value": "Apache"
-										},
-										{
-											"key": "Content-Length",
-											"value": "297"
-										},
-										{
-											"key": "Connection",
-											"value": "close"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "{\n    \"ok\": true,\n    \"failed_ipns\": [\n        {\n            \"id\": \"17766\",\n            \"timestamp\": \"2020-09-19 14:33:01\",\n            \"ethereumaddress\": \"0xa2107fa5b38d9bbd2c461d6edf11b11a50f6b974\",\n            \"contractaddress\": \"0x514910771af9ca656af840dff83e8264ecf986ca\",\n            \"amount\": \"496588.7771277759\",\n            \"url\": \"https://yoururl.com/ipnreceiver.php\",\n            \"action\": \"deposit\"\n        }\n    ]\n}"
-								}
-							]
+							"response": []
 						},
 						{
 							"name": "resendFailedIPN",
@@ -14291,7 +14097,7 @@
 							]
 						}
 					],
-					"description": "With webhooks, you can get notified about various events in the blockchain. E.g:\n\nReceipt of payment to a specific address  \nOutgoing payment from a specific address  \nExchange of sats between two specific addresses  \nExecution of a contract  \nChange of ownership of a token\n\nFor this you have to create a webhook with certain filter criteria. The following values are available as filter criteria:\n\nfrom: Outgoing address  \nto: Incoming address  \ncontract: Contract that should be monitored  \ntokenid: ID of a token that should be monitored.  \ntype: Token type (\\[ETH', 'ERC20', 'ERC721', null)\n\nParameter \"url\" defines the url we are calling with a POST Request.. The request body will have your filter criterias and some additional informatiion about your transaction:\n\n``` json\n{\n  \"id\": \"63a1ae0887ca3625b82b4924\",\n  \"webhook_id\": \"63a1ad0e87ca3625b82b4923\",\n  \"from\": \"0x0000000000000000000000000000000000000000\",\n  \"to\": \"0xa9d1e08c7793af67e9d92fe308d5697fb81d3e43\",\n  \"blocknumber\": \"123\",\n  \"datetime\": \"22-12-20 13:43:52\",\n  \"tokenid\": \"0x0000000000000000000000000000000000000000\",\n  \"type\": null,\n  \"txid\": \"000000000000000000000000000000000000000000000000000\",\n  \"amount\": \"000000000000000000000000000000000000000000000000000\"\n}\n\n```"
+					"description": "With webhooks, you can get notified about various events in the blockchain. E.g:\n\nReceipt of payment to a specific address  \nOutgoing payment from a specific address  \nExchange of sats between two specific addresses  \nExecution of a contract  \nChange of ownership of a token\n\nFor this you have to create a webhook with certain filter criteria. The following values are available as filter criteria:\n\nfrom: Outgoing address  \nto: Incoming address  \n\nParameter \"url\" defines the url we are calling with a POST Request.. The request body will have your filter criterias and some additional informatiion about your transaction:\n\n``` json\n{\n  \"id\": \"63a1ae0887ca3625b82b4924\",\n  \"webhook_id\": \"63a1ad0e87ca3625b82b4923\",\n  \"from\": \"0x0000000000000000000000000000000000000000\",\n  \"to\": \"0xa9d1e08c7793af67e9d92fe308d5697fb81d3e43\",\n  \"txid\": \"000000000000000000000000000000000000000000000000000\",\n  \"amount\": \"000000000000000000000000000000000000000000000000000\"\n}\n\n```"
 				}
 			]
 		},
