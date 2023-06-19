@@ -43,16 +43,13 @@ jobs:
           git add -A
           git commit -m "updated openapi yaml file"
           git push 
-      
-      - uses: reggionick/s3-deploy@v3
+          
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          folder: ./
-          bucket: ${{ secrets.S3_BUCKET }}
-          bucket-region: ${{ secrets.S3_BUCKET_REGION }}
-          dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
-          invalidation: /
-          delete-removed: false
-          no-cache: true
-          private: true
-          filesToInclude: "docs/*"
+          server: v2202304164651227082.happysrv.de
+          username: bitblade
+          password: ${{ secrets.ftp_password }}
+          local-dir: "./docs/"
+          server-dir: "/web/chaingateway.io/public_html/"
 
